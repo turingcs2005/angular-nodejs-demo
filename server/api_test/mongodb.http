@@ -1,0 +1,18 @@
+###
+@baseUrl = http://161.182.32.7:5001/api
+
+###
+get {{baseUrl}}/test
+
+
+###
+post {{baseUrl}}
+Content-Type: application/json
+
+{
+	"title": "Tech Stack",
+	"authors": ["Rui Wang"],
+	"keywords": ["tech stack", "MEAN", "overview"],
+	"description": "overview of MEAN + SQL stack",
+	"url": "http://localhost:5001"
+}
