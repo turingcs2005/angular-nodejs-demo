@@ -19,7 +19,7 @@
 	server --> app(app)
 	server --> src_server(src)
 	server --> dist(dist)
-	server --> database(database)
+	src_server --> database(database)
 	app --> angular(Angular)
 	src_server --> app_mts(app.mts)
 	database --> mongodb(mongodb)
@@ -71,7 +71,7 @@ project
 	|     |--environments
 	|             |
 	|             |
-	|             |--local (developement work in Linux VM using Angular cli in memory server + node.js back end, with cors enabled)
+	|             |--local (Linux VM)
 	|             |
 	|             |
 	|             |--dev (for test in Azure)
@@ -93,42 +93,40 @@ project
 	|     |     |
 	|     |     |
 	|     |     |--app.mts (entry point)
-	|     |
-	|     |
+	|     |     |
+	|     |     |
+	|     |     |--database  
+	|     |           |
+	|     |           |
+	|     |           |--mongodb
+	|     |           |   |
+	|     |           |   |
+	|     |           |   |--models (schema and model definition)
+	|     |           |   |
+	|     |           |   |
+	|     |           |   |--controllers (callback functions)
+	|     |           |   |
+	|     |           |   |
+	|     |           |   |--routes
+	|     |           |
+	|     |           |
+	|     |           |--sql
+	|     |               |
+	|     |               |
+	|     |               |--models (model definition)
+	|     |               |
+	|     |               |
+	|     |               |--controllers (callback functions)
+	|     |               |
+	|     |               |
+	|     |               |--routes
+	|     |      
 	|     |--dist (transpiled JavaScript)
-	|     |
-	|     |
-	|     |--database  
-	|     |     |
-	|     |     |
-	|     |     |--mongodb
-	|     |     |   |
-	|     |     |   |
-	|     |     |   |--models (schema and model definition)
-	|     |     |   |
-	|     |     |   |
-	|     |     |   |--controllers (callback functions)
-	|     |     |   |
-	|     |     |   |
-	|     |     |   |--routes
-	|     |     |
-	|     |     |
-	|     |     |--sql
-	|     |         |
-	|     |         |
-	|     |         |--models (model definition)
-	|     |         |
-	|     |         |
-	|     |         |--controllers (callback functions)
-	|     |         |
-	|     |         |
-	|     |         |--routes
-	|     |
 	|     |
 	|     |--app
 	|        |
 	|        |
-	|        |--angular (compiled Angular project. ng build --output-path='../server/app/Angular' -c=uat)
+	|        |--angular (compiled Angular project)
 	|
 	|
 	|--.gitignore
