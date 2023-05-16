@@ -2,3 +2,46 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.padded {
+  padding: 20px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.grab {
+  cursor: grab;
+}
+
+.grey {
+  color: grey;
+}
+
+.center{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+$magnification: (
+  times-1: 1,
+  times-2: 2,
+  times-3: 3,
+  times-4: 4,
+  times-5: 5
+);
+
+// magnified mat icons
+@each $magnification-name, $magnification-value in $magnification {
+  .magnification-#{$magnification-value} {
+    transform: scale($magnification-value);
+  }
+}
+
+.mat-icon {
+  vertical-align: middle;
+}
