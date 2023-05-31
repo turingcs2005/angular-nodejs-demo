@@ -1,7 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat; 
+@use './app/app-data/custom-color-theme' as custom;
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// creating palette from brand colors
+$primary-palette: mat.define-palette(mat.$indigo-palette);
+$accent-palette: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// creating palette from custom colors
+$custom-primary-palette: mat.define-palette(custom.$hanover-primary-palette);
+$custom-accent-palette: mat.define-palette(custom.$hanover-accent-palette, A200, A100, A400);
+
+.weak {
+ color: mat.get-color-from-palette($primary-palette, 500, .5); // saturation @ 50%
+}
+
+.hanover-weak {
+  color: mat.get-color-from-palette($custom-primary-palette, 500, .5); // saturation @ 50%
+}
+
+$colors: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900;
+@each $color in $colors {
+  .primary-#{$color} {
+    color: mat.get-color-from-palette($primary-palette, $color);
+  }
+  .accent-#{$color} {
+    color: mat.get-color-from-palette($accent-palette, $color);
+  }
+}
 
 .padded {
   padding: 20px;
@@ -15,8 +43,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   cursor: grab;
 }
 
-.grey {
-  color: grey;
+.help {
+  cursor: help;
 }
 
 .center{
@@ -44,4 +72,24 @@ $magnification: (
 
 .mat-icon {
   vertical-align: middle;
+}
+
+/* wiggle animation */
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.wiggle {
+  animation: shake 1s;
+  animation-iteration-count: infinite;
 }

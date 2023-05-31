@@ -1,132 +1,32 @@
-.container {
-  width: 200px;
-  height: 150px;
+$border-color: #979797;
+$label-color: #db202f;
+
+.dropzone {
+  width: 450px;
+  height: 200px;
+  padding: 2rem;
   text-align: center;
-  border: none;
+  border: dashed 1px $border-color;
   position: relative;
   margin: 0 auto;
-  border-radius: 10%;
-}
+  border-radius: 10px;
+  cursor: grabbing;
 
-.large-font {
-  font-size: 10px;
-  font-weight: 300;
-  color: #38424c;
-}
-
-label {
-  background-color: antiquewhite;
-  padding: 0.5rem;
-  font-family: sans-serif;
-  border-radius: 10%;
-  cursor: pointer;
-  margin-top: 1rem;
-}
-
-.drag-drop {
-  background-color: antiquewhite;
-  padding: 0 6em;
-  border: dashed 1px #979797;
-  border-radius: 10%;
-  cursor: grab;
-}
-
-.file-input {
-  display: none;
-}
-
-.fileover {
-  animation: shake 1s;
-  animation-iteration-count: infinite;
-}
-
-.files-list {
-  margin-top: 1.5rem;
-
-  .single-file {
-    display: flex;
-    padding: 0.5rem;
-    justify-content: space-between;
-    align-items: center;
-    border: dashed 1px #979797;
-    margin-bottom: 1rem;
-
-    .delete {
-      display: flex;
-      margin-left: 0.5rem;
-      cursor: pointer;
-      align-self: flex-end;
-    }
-
-
-    display: flex;
-    flex-grow: 1;
-
-    .name {
-      font-size: 14px;
-      font-weight: 500;
-      color: #353f4a;
-      margin: 0;
-    }
-
-    .size {
-      font-size: 12px;
-      font-weight: 500;
-      color: #a4a4a4;
-      margin: 0;
-      margin-bottom: 0.25rem;
-    }
-
-    .info {
-      width: 100%
-    }
+  input {
+    display: none;  // hide iput button and use label to trigger it
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+  
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #38424c;
   }
 }
 
-/* Shake animation */
-@keyframes shake {
-  0% {
-    transform: translate(1px, 1px) rotate(0deg);
-  }
 
-  10% {
-    transform: translate(-1px, -2px) rotate(-1deg);
-  }
-
-  20% {
-    transform: translate(-3px, 0px) rotate(1deg);
-  }
-
-  30% {
-    transform: translate(3px, 2px) rotate(0deg);
-  }
-
-  40% {
-    transform: translate(1px, -1px) rotate(1deg);
-  }
-
-  50% {
-    transform: translate(-1px, 2px) rotate(-1deg);
-  }
-
-  60% {
-    transform: translate(-3px, 1px) rotate(0deg);
-  }
-
-  70% {
-    transform: translate(3px, 1px) rotate(-1deg);
-  }
-
-  80% {
-    transform: translate(-1px, -1px) rotate(1deg);
-  }
-
-  90% {
-    transform: translate(1px, 2px) rotate(0deg);
-  }
-
-  100% {
-    transform: translate(1px, -2px) rotate(-1deg);
-  }
-}
 

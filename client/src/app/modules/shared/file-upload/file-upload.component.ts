@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-file-upload',
@@ -6,75 +7,34 @@ import { Component } from '@angular/core';
   styleUrls: ['./file-upload.component.scss']
 })
 export class FileUploadComponent {
-  files: any[] = [];
 
-  /**
-   * on file drop handler
-   */
-  onFileDropped(files: any) {
-    this.prepareFilesList(files);
+  constructor(
+    private http: HttpClient
+  ) {}
+
+  upload(files: FileList) {
+    let f = Array.from(files);
+    console.log(`%c 🐉 ${files.length} files have been selected:\n 📕 ${Array.from(files).map(x => x.name).join('\n 📕 ')}`, 'color: green')
   }
+  
+  hello() {}
 
-  /**
-   * handle file from browsing
-   */
-  fileBrowseHandler(files: any) {
-    this.prepareFilesList(files);
-  }
-
-  /**
-   * Delete file from files list
-   * @param index (File index)
-   */
-  deleteFile(index: number) {
-    this.files.splice(index, 1);
-  }
-
-  /**
-   * Simulate the upload process
-   */
-  uploadFilesSimulator(index: number) {
-    setTimeout(() => {
-      if (index === this.files.length) {
-        return;
-      } else {
-        const progressInterval = setInterval(() => {
-          if (this.files[index].progress === 100) {
-            clearInterval(progressInterval);
-            this.uploadFilesSimulator(index + 1);
-          } else {
-            this.files[index].progress += 5;
-          }
-        }, 200);
-      }
-    }, 1000);
-  }
-
-  /**
-   * Convert Files list to normal array list
-   * @param files (Files List)
-   */
-  prepareFilesList(files: Array<any>) {
-    for (const item of files) {
-      item.progress = 0;
-      this.files.push(item);
+  //  🐉 on files dropped using drag-and-drop box
+  onFilesDropped(files: FileList) {
+    if (files.length) {
+      this.upload(files);
     }
-    this.uploadFilesSimulator(0);
+    
+ 
   }
-
-  /**
-   * format bytes
-   * @param bytes (File size in bytes)
-   * @param decimals (Decimals point)
-   */
-  formatBytes(bytes: number, decimals: number = 0) {
-    if (bytes === 0) {
-      return '0 Bytes';
+  
+  // 🔍 on files selected using file browser
+  onFilesSelected($event: Event) {
+    let files = (<HTMLInputElement>$event.target).files; 
+    if (files && files.length) {
+      this.upload(files);
     }
-    const k = 1024;
-    const dm = decimals <= 0 ? 0 : decimals || 2;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
+  
+
 }

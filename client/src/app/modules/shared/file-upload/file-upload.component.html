@@ -1,48 +1,24 @@
-<div class="container" >
 
-	<div class="center">
-		<!-- drag and drop files -->
-    <div class="drag-drop" appDnd (fileDropped)="onFileDropped($event)">
-			<mat-icon class="grey">cloud_upload</mat-icon>
-			<div>Drag &amp; Drop</div>
-		</div>
+<!-- A user can upload an array of files using one of the 2 methods below: 
+	🐉 drag and drop files, or 
+	🔍 click a button to select files 
+-->
+<!-- 🐉 file drag and drop -->
+<div class="dropzone" appDragAndDrop (fileDropped)="onFilesDropped($event)">  
+	
+	<mat-icon class="magnification-2 primary-500">cloud_upload</mat-icon> <br><br>
+	<h3>Drag and drop files here <mat-icon class="accent-200 help"
+		matTooltip="As of May, 2023, Google Chrome for Linux has a bug where file drop sometimes results in empty file list. This will not 
+		affect you if you use Windows operating system. If you use a Linux-based operating system (Chromebook, Android phone/tablet), please 
+		use file attach button below instead of drag-and-drop.">
+		help</mat-icon></h3>
+	<h3>or</h3>
+	
+	<!-- 🔍 input for file selection (not displayed, triggered with a button) -->
+	<input type="file" #fileSelectRef id="filesSelectRef" multiple (change)="onFilesSelected($event)" />
+	<!-- button for triggering file selection -->
+	<button mat-fab (click)="fileSelectRef.click()" class="grab" matTooltip="click to select files">
+		<mat-icon>attach_file</mat-icon>
+	</button>
 
-		<div class="large-font"> Or <div>
-		<!-- upload files -->
-		<div>
-			<input class="file-input" type="file" #fileDropRef id="fileDropRef" multiple 
-			(change)="fileBrowseHandler($any($event.target).files)" />
-			
-			<label class="mat-elevation-z4"
-				matTooltip="Hold Ctrl key to select individual files, or press Shift key to select a range of files"
-      	for="fileDropRef">
-        Attach file(s)<mat-icon>attach_file</mat-icon>
-			</label>
-		</div>
-	</div>
 </div>
-
-<div class="files-list">
-	<div class="single-file" *ngFor="let file of files; let i = index">
-		<div style="width: 50px">
-			<mat-icon>description</mat-icon>
-		</div>
-		<div class="info">
-			<h4 class="name">
-				{{ file?.name }}
-			</h4>
-			<p class="size">
-				{{ formatBytes(file?.size) }}
-			</p>
-			<app-progress [progress]="file?.progress"></app-progress>
-		</div>
-
-		<div class="delete" (click)="deleteFile(i)">
-			<mat-icon>delete</mat-icon>
-		</div>
-	</div>
-</div>
-
-	<div>
-
-	</div>

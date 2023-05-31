@@ -35,14 +35,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FileUploadComponent } from './file-upload/file-upload.component';
-import { DndDirective } from './file-upload/dnd.directive';
 import { ProgressComponent } from './progress/progress.component';
+import { DragAndDropDirective } from './drag-and-drop.directive';
 
 @NgModule({
   declarations: [
     FileUploadComponent,
-    DndDirective,
-    ProgressComponent
+    ProgressComponent,
+    DragAndDropDirective
   ],
   imports: [
     CommonModule,
@@ -114,7 +114,8 @@ import { ProgressComponent } from './progress/progress.component';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    FileUploadComponent
+    FileUploadComponent,
+    DragAndDropDirective
 
   ]
 })
