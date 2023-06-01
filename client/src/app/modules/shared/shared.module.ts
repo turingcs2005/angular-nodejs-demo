@@ -37,6 +37,7 @@ import { RouterModule } from '@angular/router';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { ProgressComponent } from './progress/progress.component';
 import { DragAndDropDirective } from './drag-and-drop.directive';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { DragAndDropDirective } from './drag-and-drop.directive';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
+    MatProgressBarModule
   ],
   exports: [
     MatToolbarModule,
@@ -115,7 +117,8 @@ import { DragAndDropDirective } from './drag-and-drop.directive';
     HttpClientModule,
     RouterModule,
     FileUploadComponent,
-    DragAndDropDirective
+    DragAndDropDirective,
+    MatProgressBarModule
 
   ]
 })

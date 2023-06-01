@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEventType } from '@angular/common/http';
+import { Subscription, catchError, finalize } from 'rxjs';
 
 @Component({
   selector: 'app-file-upload',
@@ -8,24 +9,45 @@ import { HttpClient } from '@angular/common/http';
 })
 export class FileUploadComponent {
 
+  baseUrl = 'http://localhost:4455/api/';
+  uploadProgress: number | null = null;
+  uploadSub: Subscription | null = null;
+
   constructor(
     private http: HttpClient
   ) {}
 
   upload(files: FileList) {
-    let f = Array.from(files);
-    console.log(`%c 🐉 ${files.length} files have been selected:\n 📕 ${Array.from(files).map(x => x.name).join('\n 📕 ')}`, 'color: green')
+    let fileArray = Array.from(files);
+    console.log(`%c ${files.length} files have been selected:\n 📕 ${Array.from(files).map(x => x.name).join('\n 📕 ')}`, 'color: green');
+
+    // test with 1st file 
+    const formData = new FormData(); // FormData is an interface for name-value pairs
+    fileArray.forEach(x => {
+      formData.append(x.name, x);    // there is a risk of duplicate file names when saving files to hard drive
+    });
+
+    const upload$ = this.http.post(`${this.baseUrl}file-upload`, formData, {
+      reportProgress: true,          // as POST call continues, event objects will be emitted to report on progress.
+      observe: 'events'
+    }).pipe(  // once observable completes or errors out, reset progress bar to null and upload subscription to null.
+      finalize( () => this.reset() )
+    );
+
+    this.uploadSub = upload$.subscribe( event => {
+      if (event.type == HttpEventType.UploadProgress && event.total && event.total > 0) {
+        this.uploadProgress = Math.round(100 * event.loaded / event.total);
+      }
+    });
+
+    // upload$.subscribe();
   }
-  
-  hello() {}
 
   //  🐉 on files dropped using drag-and-drop box
   onFilesDropped(files: FileList) {
     if (files.length) {
       this.upload(files);
     }
-    
- 
   }
   
   // 🔍 on files selected using file browser
@@ -34,6 +56,16 @@ export class FileUploadComponent {
     if (files && files.length) {
       this.upload(files);
     }
+  }
+
+  cancelUpload() {
+    this.uploadSub?.unsubscribe();
+    this.reset();
+  }
+
+  reset() {
+    this.uploadProgress = null;
+    this.uploadSub = null;
   }
   
 
