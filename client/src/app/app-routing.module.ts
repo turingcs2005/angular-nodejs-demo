@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'upload', loadChildren: () => import('./modules/upload/upload.module').then(m => m.UploadModule) }, { path: 'shared', loadChildren: () => import('./modules/shared/shared.module').then(m => m.SharedModule) },
   { path: '', component: HomeComponent},
   { path: 'help', component: HelpComponent},
+  { path: 'upload', loadChildren: () => import('./modules/upload/upload.module').then(m => m.UploadModule) },
 ];
 
 @NgModule({

@@ -9,6 +9,9 @@ import { HomeComponent } from './components/home/home.component';
 import { HelpComponent } from './components/help/help.component';
 import { SharedModule } from './modules/shared/shared.module';
 
+import { MarkdownModule } from 'ngx-markdown';
+import { SecurityContext } from '@angular/core';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +23,11 @@ import { SharedModule } from './modules/shared/shared.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    MarkdownModule.forRoot({
+        sanitize: SecurityContext.NONE
+    }),
+    MarkdownModule.forChild()
   ],
   providers: [],
   bootstrap: [AppComponent]

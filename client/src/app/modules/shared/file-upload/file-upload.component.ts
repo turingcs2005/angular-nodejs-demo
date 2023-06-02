@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Subscription, catchError, finalize } from 'rxjs';
 
@@ -9,7 +9,7 @@ import { Subscription, catchError, finalize } from 'rxjs';
 })
 export class FileUploadComponent {
 
-  baseUrl = 'http://localhost:4455/api/';
+  @Input() baseUrl = '';
   uploadProgress: number | null = null;
   uploadSub: Subscription | null = null;
 
@@ -27,7 +27,7 @@ export class FileUploadComponent {
       formData.append(x.name, x);    // there is a risk of duplicate file names when saving files to hard drive
     });
 
-    const upload$ = this.http.post(`${this.baseUrl}file-upload`, formData, {
+    const upload$ = this.http.post(`${this.baseUrl}`, formData, {
       reportProgress: true,          // as POST call continues, event objects will be emitted to report on progress.
       observe: 'events'
     }).pipe(  // once observable completes or errors out, reset progress bar to null and upload subscription to null.
@@ -67,6 +67,5 @@ export class FileUploadComponent {
     this.uploadProgress = null;
     this.uploadSub = null;
   }
-  
 
 }

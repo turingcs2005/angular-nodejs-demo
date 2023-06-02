@@ -1,1 +1,18 @@
-<app-file-upload></app-file-upload>
+<app-file-upload baseUrl="http://localhost:4455/api/file-upload"></app-file-upload>
+
+<br>
+
+<mat-expansion-panel>
+	<mat-expansion-panel-header>
+		<mat-panel-title>
+			Documentation
+		</mat-panel-title>
+	</mat-expansion-panel-header>
+	
+	<markdown
+		mermaid
+		src="../../../assets/markdown/file_upload/file_upload.md"
+	>
+	</markdown>
+
+</mat-expansion-panel>

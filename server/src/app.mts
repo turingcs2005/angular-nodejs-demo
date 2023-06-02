@@ -28,12 +28,15 @@ app.use('/api', fileUploadRouter);
 
 // 🔥 Serve angular app
 app.use(express.static(path.join(__dirname, 'angular')));
+
+/* In case the app needs to serve these uploaded files.
+   Allowing users direct access to files saving the hassle 
+   of creating CRUD operations for file manipulation, etc.
+*/
+app.use(express.static(path.join(__dirname, '..', 'files')));
+
 app.all('/*', (req, res, next) => {
     res.sendFile('index.html', {root: path.join(__dirname, 'angular')});
-});
-
-app.get('/', (req, res) => {
-	res.status(200).send('Hello, world!');
 });
 
 app.listen(PORT, () => {
