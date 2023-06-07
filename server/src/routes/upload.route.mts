@@ -1,5 +1,5 @@
 import express from 'express';
-import { FileArray, UploadedFile } from 'express-fileupload';
+import { UploadedFile } from 'express-fileupload';
 import fs from 'fs';
 
 import path from "path";
